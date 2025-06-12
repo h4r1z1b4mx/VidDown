@@ -7,6 +7,7 @@ import InputFeild from "@/components/InputFeild";
 import { Nav } from "@/components/Nav";
 import { Text } from "@/components/Text";
 import { ThreeBackground } from "@/components/ui/Threebackground";
+import { Floating } from "@/components/Floating";
 
 export default function Home() {
   const searchParams = useSearchParams();
@@ -37,6 +38,17 @@ export default function Home() {
     fetchPostData();
   }, [url]);
 
+function handleSumit() {
+  if (!thumbnail) return;
+
+  const link = document.createElement("a");
+  link.href = thumbnail;
+  link.target = "_blank"; // Open in new tab
+  link.rel = "noopener noreferrer";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
 
   // console.log(post.data.image_medium_url);
   const media = post?.data?.media?.items?.[0];
@@ -54,24 +66,6 @@ export default function Home() {
     post?.data?.pinner?.image_medium_url;
 
 
-const handleSubmit = async () => {
-  try {
-    const response = await fetch(thumbnail, { mode: "cors" });
-    const blob = await response.blob();
-    const downloadUrl = URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-    a.href = downloadUrl;
-    a.download = "pinterest-image.jpg";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-
-    URL.revokeObjectURL(downloadUrl);
-  } catch (err) {
-    console.error("Image download failed:", err);
-  }
-};
 
   const title = post?.data?.title || "Media Preview";
 
@@ -152,7 +146,7 @@ const handleSubmit = async () => {
                   />
                   <button
                     type="submit"
-                    onClick={handleSubmit}
+                    onClick={handleSumit}
                     className="h-12 p-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg"
                   >
                     Download Image
@@ -165,7 +159,11 @@ const handleSubmit = async () => {
             </div>
           )}
         </div>
+          
+            <Floating/>
+        
       </div>
+  
     </div>
   );
 }

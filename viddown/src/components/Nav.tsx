@@ -10,6 +10,7 @@ import {
   MobileNavToggle,
   MobileNavMenu,
 } from "@/components/ui/resizable-navbar";
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import { useState } from "react";
 
 export function Nav() {
@@ -26,9 +27,13 @@ export function Nav() {
         <NavBody>
           <NavbarLogo />
           <NavItems items={navItems} />
-          <div className="flex items-center gap-4">
-            <NavbarButton variant="primary">Login</NavbarButton>
-          </div>
+          <SignedOut>
+          <SignInButton />
+            <SignUpButton />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
         </NavBody>
 
         {/* Mobile Navigation */}
