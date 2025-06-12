@@ -1,5 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import {
   motion,
@@ -120,11 +121,11 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
     <motion.div
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-2",
+        "absolute inset-0 hidden flex-1 flex-row items-center justify-end space-x-2 text-sm font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-2",
         className,
       )}
     >
-      {items.map((item, idx) => (
+      {/* {items.map((item, idx) => (
         <a
           onMouseEnter={() => setHovered(idx)}
           onClick={onItemClick}
@@ -138,9 +139,34 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
               className="absolute inset-0 h-full w-full rounded-full bg-gray-100 dark:bg-neutral-800"
             />
           )}
-          <span className="relative z-20">{item.name}</span>
+                <SignedOut>
+                    <SignInButton />
+                      <SignUpButton />
+                      </SignedOut>
+                      <SignedIn>
+                        <UserButton />
+                      </SignedIn>
         </a>
-      ))}
+      ))} */}
+        <SignedOut>
+          <div className="p-2 px-3 bg-white rounded-md font-bold text-black">
+            <SignInButton />  
+          </div>
+          <div className="w-3">
+
+          </div>
+        
+          <div className="p-2 px-3 bg-white rounded-md font-bold text-black">
+            <SignUpButton />  
+          </div>
+          
+        
+        </SignedOut>
+
+
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
     </motion.div>
   );
 };

@@ -27,13 +27,13 @@ export function Nav() {
         <NavBody>
           <NavbarLogo />
           <NavItems items={navItems} />
-          <SignedOut>
-          <SignInButton />
-            <SignUpButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+            {/* <SignedOut>
+            <SignInButton />
+              <SignUpButton />
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn> */}
         </NavBody>
 
         {/* Mobile Navigation */}
